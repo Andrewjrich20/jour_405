@@ -28,7 +28,7 @@ crimes <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads
 ### Task 4: Calculate the total crime rate for each year (picking our unit!)
 
 ```{r}
-crimes |> mutate(total_rate = grand_total/population * 10000)
+crimes <- crimes |> mutate(total_rate = grand_total/population * 10000)
 ```
 
 
@@ -45,7 +45,7 @@ crimes_with_rates <- crimes |> mutate(violent_rate = violent_crime_total/populat
 
 Write a few sentences about what you found in the data. What years had the highest crime rates? What years had the lowest crime rates? Does the pattern match your expectations?
 
-
+The years with the highest crime rates were 1980, 1981, and 1979. On the other hand, the years with the lowest crime rates were 2020, 2019 and 2018. The clear pattern in this data is that, over time, the crime rates have decreased steadily. This matches my expectations because crime reporting and the systems involved with it are much more complete than they were 40 years ago. With the use of technology, reporting and understanding crime trends has become easier and more comprehensive. Also, 2020 having the lowest crime rate overall makes sense because of the COVID-19 pandemic. With less people leaving their houses, crime statistics responded accordingly.
 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
