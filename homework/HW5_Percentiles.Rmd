@@ -64,3 +64,17 @@ ANSWER HERE: Frederick, MD has seen alarming increases in both violent and prope
 ### Task 9: Save Your Work and Put it on GitHub
 
 Save this notebook, then commit it to your local repository. Push the changes to your GitHub repository and submit the URL for this file in ELMS.
+
+### Task 10: Calculating Percentiles
+```{r}
+md_cities_percentiles <- md_cities_change |>
+  mutate(percentiles = ntile(violent_rate_2020, 100)) 
+
+```
+There are 10 cities above the 90th percentile.
+
+```{r}
+md_cities_percentiles |>
+  summarise(IQR(violent_rate_2020))
+```
+This new information does change my best story idea from the previous assignment. This is because Frederick is only in the 22nd percentile for violent crime rates in Maryland. I do not think that warrants a story because of the percentile ranking.
