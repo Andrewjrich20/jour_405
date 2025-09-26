@@ -123,7 +123,7 @@ Is the distribution normal or skewed in one direction? Write a sentence in which
 
 
 **Answer**:
-The distribution is slighlty skewed towards the higher end of the data. However, the majority of the data is covered by one standard deviation. Within that standard deviation is about 68% of the total data in the set.
+The distribution is slighlty skewed towards the lower end of the data. However, the majority of the data is covered by one standard deviation. Within that standard deviation is about 68% of the total data in the set.
 
 
 
