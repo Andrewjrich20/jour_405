@@ -122,6 +122,7 @@ car_theft_rate |>
 #Task 13: Write 2-3 sentences describing what these calculations reveal about the distribution of car thefts in Maryland. What's the lede of a story about your findings? 
 
 **Write your answer here:**
+I got stuck here trying to load janitor and it then wouldn't let me run the code.
 
 ## Part 4: Data Analysis Scenario (20 points)
 
@@ -135,6 +136,9 @@ Write 3-4 sentences explaining:
 3. What additional context or data would you need to make this a complete story? (5 points)
 
 **Write your answer here:**
+1. I would use measures like mean so I could see what the averge response time is. I would then calculate the change over time in that average.
+2. A scatterplot would help to better understand the data.
+3. I would do reporting on how many calls were being received and the number of people that are actually answering the phones.
 
 
 # Excellent Response
