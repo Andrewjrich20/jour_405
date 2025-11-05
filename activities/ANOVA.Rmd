@@ -156,7 +156,7 @@ All comparisons show extremely small p-values, indicating these differences are 
 
 Based on our analysis, we can now answer:
 
-1. Is there a significant difference in SAT scores across college types? Yes, there is signinficant differences between the SAT scores across college types. We know this because the p-value is extremely low, indicating the significance of the results. In this case the p-value is 0.00000000000000002.
+1. Is there a significant difference in SAT scores across college types? Yes, there is signinficant differences between the SAT scores across college types. We know this because the p-value is extremely low, indicating the significance of the results. In this case the p-value is 0.00000000000000002. Also the F-value is 40 times larger than would be expected. This clearly indicates the significance of the data.
 2. Which specific college types differ from each other? Public and private schools differ greatly from community schools. The difference between private and community schools is 366.96 and between public and community schools that difference is 292.55.
 3. How large are these differences? The differences are quite large as it is 366.96 for private-community and 292.55 for public-community. The difference between public and private schools is much smaller at -74.4.
 
