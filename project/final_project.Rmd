@@ -1,5 +1,5 @@
 ---
-title: "final_project.Rmd"
+title: "Andrew Rich Final Project pt 1"
 output: html_document
 date: "2025-11-13"
 ---
