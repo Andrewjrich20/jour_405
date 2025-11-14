@@ -1,0 +1,33 @@
+---
+title: "final_project.Rmd"
+output: html_document
+date: "2025-11-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+Here I am loading in the data that I downloaded from the ELMS assignment. I am putting the data into a new dataframe called songs.
+```{r}
+songs <- read_csv("BillboardHot100.csv")
+
+```
+This block is examining the happiness column to look for the mean, median, and the minimum and maximum values. I attatched the na.rm = TRUE command because the data was getting caught up on blank spaces in that data. This clears the empty spots so I can focus on the numbers for the calculations. 
+```{r}
+happiness <- songs |>
+  summarise(mean_happiness = mean(Happiness, na.rm = TRUE),
+            median_happiness = median(Happiness, na.rm = TRUE),
+            min_happiness = min(Happiness, na.rm = TRUE),
+            max_happiness = max(Happiness, na.rm = TRUE))
+```
+The mean happiness score is 61.78, with a median of 66. The lowest happiness score was 4 with the highest at 99. 
+
+My data contains information about various songs that made it to number 1 on the Billboard charts. The data ranges from August of 1958 to January 2025. There is also information about the artists, record labels and genres as well as more specific content like volume and happiness. For my analysis I will focus on the happiness column as well as the overall rating column and weeks at number 1 column. I want to see if there is any correlation between how "happy" a song is and how highly it is rated and recieved by listeners. The happiness is measured on a scale of 0-10 that is supplied by Spotify. I would like to know how the happiness score provided by Spotify is calculated. I think that could help me better interpret what the data can reveal. 
+
+Null Hypothesis: Songs that spent at least 4 weeks at number 1 did not have a higher happiness score than songs that spent less than 4 weeks at number 1.
+Alternative Hypothesis: Songs that spent at least 1 month (4 weeks) at the number 1 spot have a higher happiness score than song that spent less than 4 weeks at number 1.
+ 
