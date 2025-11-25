@@ -13,7 +13,7 @@ library(tidyverse)
 ```
 Here I am loading in the data that I downloaded from the ELMS assignment. I am putting the data into a new dataframe called songs.
 ```{r}
-songs <- read_csv("BillboardHot100.csv")
+songs <- read.csv("Billboard100.csv")
 
 ```
 This block is examining the happiness column to look for the mean, median, and the minimum and maximum values. I attatched the na.rm = TRUE command because the data was getting caught up on blank spaces in that data. This clears the empty spots so I can focus on the numbers for the calculations. 
@@ -30,4 +30,49 @@ My data contains information about various songs that made it to number 1 on the
 
 Null Hypothesis: Songs that spent at least 4 weeks at number 1 did not have a higher happiness score than songs that spent less than 4 weeks at number 1.
 Alternative Hypothesis: Songs that spent at least 1 month (4 weeks) at the number 1 spot have a higher happiness score than song that spent less than 4 weeks at number 1.
+
+Here I am running a linear regression to further investigate the relationship between the happiness of songs and if that has any affect on how many weeks that song spends at number one on the charts.
+```{r}
+model <- lm(`Weeks.at.Number.One` ~ `Happiness`, data = songs)
+
+summary(model)
+```
+This linear regression showed a P-value of 0.2787. This value suggests that there is really no relationship between the happiness score of a song and how many weeks that song spent at number 1 on the Billboard charts.
+
+Here I am separating the happiness category into two sections where one has a happiness score above 50 and the other has a happiness score of 50 or below.
+```{r}
+songs <- songs |>
+mutate(
+  high_happiness = case_when(
+    Happiness < 50 ~ 0,
+    TRUE ~ 1)
+)
+```
+
+I am now creating two dataframes so that I can run the t-test.
+```{r}
+high_happiness_songs <- songs |>
+  filter(high_happiness == 1) |>
+  select(Weeks.at.Number.One)
+
+low_happiness_songs <- songs |>
+  filter(high_happiness == 0) |>
+  select(Weeks.at.Number.One)
+```
+
+Running the t-test.
+```{r}
+t.test(high_happiness_songs, low_happiness_songs)
+```
+This t-test is telling us that there is a 71.58% chance that the number of weeks a song spends at number one are the same for a low happiness score versus a high happiness score. Essentially, happiness score does not affect how long a song spends at number 1 on the Billboard charts. This means we would fail to reject the null hypothesis. 
+
+Here I am creating a scatterplot that shows the relationship between happiness score and weeks at number 1.
+```{r}
+songs |> 
+  ggplot() +
+  geom_point(aes(x=Happiness, y=Weeks.at.Number.One)) +
+  geom_smooth(aes(x=Happiness, y=Weeks.at.Number.One), method="lm")
+```
+
+
  
