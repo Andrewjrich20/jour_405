@@ -73,6 +73,9 @@ songs |>
   geom_point(aes(x=Happiness, y=Weeks.at.Number.One)) +
   geom_smooth(aes(x=Happiness, y=Weeks.at.Number.One), method="lm")
 ```
+The scatterplot clearly shows a weak relationship between the two variables. The blue line does not act as a "line of best fit" as it does not really tell us much about the relationship between happiness score and weeks at number 1.
 
+Story Pitch: "Happiness Doesn't Make a Hit"
+Based on my analysis of the billboard song data, it is clear that having a higher happiness score does not mean that a song will spend more weeks at number 1 on the charts. After running a t-test and a linear regression, the results confirm my null hypothesis. The linear regression resulted in a p-value of 0.2787, which suggests that there is really no relationship between happiness score and weeks at number 1. The t-test told me that there is a 71.58% chance a song with a low happiness score has the same amount of weeks at number 1 compared to a high happiness song. As I move forward with the reporting for this story my plan would be to reach out to record labels and people within the music industry to get their opinion on whether or not happiness affects the success of a song. I would do some more research to figure out the top songs from the past years to see what their happiness score is to find out if there is any sort of pattern. I would also speak to artists to see if they have a strategy for making happy songs versus sad songs. Some potential problems include, it could be tough to get in contact with relevant artists and people in the music industry to get their opinion. Also, my story wouldn't necessarily make a claim as to what makes a song stay at number 1 the longest, it would just state that happiness score is not a valid predictor of success.
 
  
