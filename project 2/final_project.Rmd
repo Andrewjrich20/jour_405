@@ -1,0 +1,81 @@
+---
+title: "Andrew Rich Final Project pt 1"
+output: html_document
+date: "2025-11-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+Here I am loading in the data that I downloaded from the ELMS assignment. I am putting the data into a new dataframe called songs.
+```{r}
+songs <- read.csv("Billboard100.csv")
+
+```
+This block is examining the happiness column to look for the mean, median, and the minimum and maximum values. I attatched the na.rm = TRUE command because the data was getting caught up on blank spaces in that data. This clears the empty spots so I can focus on the numbers for the calculations. 
+```{r}
+happiness <- songs |>
+  summarise(mean_happiness = mean(Happiness, na.rm = TRUE),
+            median_happiness = median(Happiness, na.rm = TRUE),
+            min_happiness = min(Happiness, na.rm = TRUE),
+            max_happiness = max(Happiness, na.rm = TRUE))
+```
+The mean happiness score is 61.78, with a median of 66. The lowest happiness score was 4 with the highest at 99. 
+
+My data contains information about various songs that made it to number 1 on the Billboard charts. The data ranges from August of 1958 to January 2025. There is also information about the artists, record labels and genres as well as more specific content like volume and happiness. For my analysis I will focus on the happiness column as well as the overall rating column and weeks at number 1 column. I want to see if there is any correlation between how "happy" a song is and how highly it is rated and recieved by listeners. The happiness is measured on a scale of 0-10 that is supplied by Spotify. I would like to know how the happiness score provided by Spotify is calculated. I think that could help me better interpret what the data can reveal. 
+
+Null Hypothesis: Songs that spent at least 4 weeks at number 1 did not have a higher happiness score than songs that spent less than 4 weeks at number 1.
+Alternative Hypothesis: Songs that spent at least 1 month (4 weeks) at the number 1 spot have a higher happiness score than song that spent less than 4 weeks at number 1.
+
+Here I am running a linear regression to further investigate the relationship between the happiness of songs and if that has any affect on how many weeks that song spends at number one on the charts.
+```{r}
+model <- lm(`Weeks.at.Number.One` ~ `Happiness`, data = songs)
+
+summary(model)
+```
+This linear regression showed a P-value of 0.2787. This value suggests that there is really no relationship between the happiness score of a song and how many weeks that song spent at number 1 on the Billboard charts.
+
+Here I am separating the happiness category into two sections where one has a happiness score above 50 and the other has a happiness score of 50 or below.
+```{r}
+songs <- songs |>
+mutate(
+  high_happiness = case_when(
+    Happiness < 50 ~ 0,
+    TRUE ~ 1)
+)
+```
+
+I am now creating two dataframes so that I can run the t-test.
+```{r}
+high_happiness_songs <- songs |>
+  filter(high_happiness == 1) |>
+  select(Weeks.at.Number.One)
+
+low_happiness_songs <- songs |>
+  filter(high_happiness == 0) |>
+  select(Weeks.at.Number.One)
+```
+
+Running the t-test.
+```{r}
+t.test(high_happiness_songs, low_happiness_songs)
+```
+This t-test is telling us that there is a 71.58% chance that the number of weeks a song spends at number one are the same for a low happiness score versus a high happiness score. Essentially, happiness score does not affect how long a song spends at number 1 on the Billboard charts. This means we would fail to reject the null hypothesis. 
+
+Here I am creating a scatterplot that shows the relationship between happiness score and weeks at number 1.
+```{r}
+songs |> 
+  ggplot() +
+  geom_point(aes(x=Happiness, y=Weeks.at.Number.One)) +
+  geom_smooth(aes(x=Happiness, y=Weeks.at.Number.One), method="lm")
+```
+The scatterplot clearly shows a weak relationship between the two variables. The blue line does not act as a "line of best fit" as it does not really tell us much about the relationship between happiness score and weeks at number 1.
+
+Story Pitch: "Happiness Doesn't Make a Hit"
+Based on my analysis of the billboard song data, it is clear that having a higher happiness score does not mean that a song will spend more weeks at number 1 on the charts. After running a t-test and a linear regression, the results confirm my null hypothesis. The linear regression resulted in a p-value of 0.2787, which suggests that there is really no relationship between happiness score and weeks at number 1. The t-test told me that there is a 71.58% chance a song with a low happiness score has the same amount of weeks at number 1 compared to a high happiness song. As I move forward with the reporting for this story my plan would be to reach out to record labels and people within the music industry to get their opinion on whether or not happiness affects the success of a song. I would do some more research to figure out the top songs from the past years to see what their happiness score is to find out if there is any sort of pattern. I would also speak to artists to see if they have a strategy for making happy songs versus sad songs. Some potential problems include, it could be tough to get in contact with relevant artists and people in the music industry to get their opinion. Also, my story wouldn't necessarily make a claim as to what makes a song stay at number 1 the longest, it would just state that happiness score is not a valid predictor of success.
+
+ 
